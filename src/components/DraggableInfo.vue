@@ -22,7 +22,12 @@
       </el-collapse>
     </div>
     <div ref="centerContainer" class="center">
-      <canvas ref="target" :width="centerContainerWidth" :height="centerContainerHeight" id="target"></canvas>
+      <canvas
+        ref="target"
+        :width="centerContainerWidth"
+        :height="centerContainerHeight"
+        id="target"
+      ></canvas>
       <transition name="fade">
         <div
           class="device-tooltip"
@@ -50,10 +55,11 @@
       :before-close="handleClose"
     >
       <el-select
-              :style="{width:'100%'}"
-              v-model="selectedDeviceId"
-              @change="selectTrigger"
-              placeholder="请选择设备名称">
+        :style="{ width: '100%' }"
+        v-model="selectedDeviceId"
+        @change="selectTrigger"
+        placeholder="请选择设备名称"
+      >
         <el-option
           v-for="item in deviceNameOptions"
           :key="item.id"
@@ -107,16 +113,16 @@ export default {
           name: '#冷水主机2'
         }
       ], // 设备名称选项
-      currentNode: null, // 当前选择的节点
+      currentNode: null // 当前选择的节点
     }
   },
   computed: {},
   watch: {},
   created() {},
   mounted() {
-    this.onResizeClient();
+    this.onResizeClient()
     this.initJTopo()
-    window.addEventListener("resize", ()=>{
+    window.addEventListener('resize', () => {
       this.onResizeClient()
     })
   },
@@ -127,9 +133,11 @@ export default {
      * @create: 2019/2/18 10:30
      **/
     onResizeClient() {
-      let centerContainer = this.$refs.centerContainer;
-      this.centerContainerHeight = window.getComputedStyle(centerContainer).height; // 获取容器内部高度
-      this.centerContainerWidth = window.getComputedStyle(centerContainer).width; // 获取容器内部宽度
+      let centerContainer = this.$refs.centerContainer
+      this.centerContainerHeight = window.getComputedStyle(
+        centerContainer
+      ).height // 获取容器内部高度
+      this.centerContainerWidth = window.getComputedStyle(centerContainer).width // 获取容器内部宽度
     },
     /**
      * @author: WangXinYu
@@ -157,7 +165,7 @@ export default {
       scene.background = require('../image/timg.jpg')
       // var colors = ['0,0,255','144,238,144','255,165,0','255,0,0']; //蓝色、绿色、橙色、红色
       // var currentNode = null
-      stage.mode = _this.isEdit ? 'edit': 'drag'
+      stage.mode = _this.isEdit ? 'edit' : 'drag'
       // _this.showJTopoToobar(stage)
       // var currentType = '1';
       // var beginNode = null
@@ -523,15 +531,15 @@ export default {
       loading.close()
     },
     /**
-    * @author: WangXinYu
-    * @describe: 选项改变时触发的事件
-    * @create: 2019/2/20 10:01
-    **/
-    selectTrigger(val){
-      let obj = this.deviceNameOptions.find(value=> {
-        return value.id = val;
+     * @author: WangXinYu
+     * @describe: 选项改变时触发的事件
+     * @create: 2019/2/20 10:01
+     **/
+    selectTrigger(val) {
+      let obj = this.deviceNameOptions.find(value => {
+        return (value.id = val)
       })
-      this.selectedDeviceName = obj.name;
+      this.selectedDeviceName = obj.name
     }
     /*********************** 模态框事件 结束 ************************/
   }
